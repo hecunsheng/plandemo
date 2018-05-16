@@ -9,7 +9,7 @@ import java.util.List;
  * @Date: 2018/5/15 14:01
  * @Description: 浅入了解策略模式、责任链模式、管道模式 dubbo里面运用了很多这种模式
  */
-public class FilterApples {
+public class FilterApplesMain {
 
     static List<Apple>  repos   = Arrays.asList(new Apple(100, "green"),
             new Apple(90, "white"),
@@ -39,7 +39,7 @@ public class FilterApples {
         }));*/
 //        System.out.println(filterApples("green",100,false));//03版本
 //        System.out.println(filterApplesByWithColor("yellow"));//02版本
-//        System.out.println(FilterApples.filterGreenApples()); //01版本
+//        System.out.println(FilterApplesMain.filterGreenApples()); //01版本
     }
     //05版本 抽象泛型
     private static <T>List<T> filterFruit(List<T> repos,IAppleFilter iAppleFilter){
