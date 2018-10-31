@@ -1,6 +1,6 @@
 package sun.star.plan.qccr;
-
 import java.util.Map;
+
 
 /**
  * 一个默认的继承Result的实现类。
@@ -8,11 +8,9 @@ import java.util.Map;
  * <p>1. 增加构造函数，直接设置成功失败</p>
  * <p>2. 增加回滚控制，用于事务处理控制是否进行回滚</p>
  *
- * @Author: hecs
- * @Date: 2018/10/10 10:37
- * @Description:
  */
 public class SysAppResult extends Result<Object> {
+
     /**  */
     private static final long  serialVersionUID = 1L;
 
@@ -23,7 +21,7 @@ public class SysAppResult extends Result<Object> {
     public static SysAppResult fail             = new SysAppResult(CommonStateCode.FAILED);
 
     /** 成功 */
-    private SysResultEnum      resultStatus     = SysResultEnum.Y;
+    private SysResultEnum resultStatus     = SysResultEnum.Y;
 
     /**
      * 是否回滚标识。true表示回滚；false表示不回滚
@@ -40,8 +38,8 @@ public class SysAppResult extends Result<Object> {
 
     /**
      * 成功
-     * @param isSuccess
-     * @param data
+     * @param rt
+     * @param <T>
      */
     public <T> SysAppResult(Result<T> rt) {
         this(rt.getData(), rt.getStateCode(),
@@ -50,7 +48,6 @@ public class SysAppResult extends Result<Object> {
 
     /**
      * 成功
-     * @param isSuccess
      * @param data
      */
     public SysAppResult(Object data) {
@@ -67,8 +64,8 @@ public class SysAppResult extends Result<Object> {
 
     /**
      * 成功
-     * @param isSuccess
      * @param data
+     * @param appMsg
      */
     public SysAppResult(Object data, String appMsg) {
         this(data, CommonStateCode.SUCCESS, CommonStateCode.SUCCESS.getDesc());
@@ -76,8 +73,7 @@ public class SysAppResult extends Result<Object> {
 
     /**
      * 成功
-     * @param isSuccess
-     * @param data
+     * @param stateCode
      */
     public SysAppResult(StateCode stateCode) {
         this(stateCode, stateCode.getDesc());
@@ -85,13 +81,12 @@ public class SysAppResult extends Result<Object> {
 
     /**
      * 成功
-     * @param isSuccess
-     * @param data
+     * @param stateCode
+     * @param extInfo
      */
     public SysAppResult(StateCode stateCode, String extInfo) {
         this(null, stateCode, extInfo);
     }
-
     /**
      * 设置失败
      * @param data
@@ -312,4 +307,5 @@ public class SysAppResult extends Result<Object> {
         this.e = e;
         this.resultStatus = SysResultEnum.E;
     }
+
 }

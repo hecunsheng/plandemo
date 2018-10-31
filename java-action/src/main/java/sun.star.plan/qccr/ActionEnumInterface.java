@@ -1,5 +1,4 @@
-package sun.star.plan.qccr;
-
+package sun.star.plan.qccr; /**
 /**
  * 业务接口枚举
  * <p>
@@ -19,9 +18,6 @@ package sun.star.plan.qccr;
  *              4. bizCode 具体业务，多个接口可以对应统一业务，用于业务加锁操作，列如：新增接口
  *      </pre>
  * </p>
- * @Author: hecs
- * @Date: 2018/10/10 14:18
- * @Description:
  */
 public interface ActionEnumInterface {
         /**
@@ -48,4 +44,5 @@ public interface ActionEnumInterface {
          * @return 枚举代码描述
          */
         public String getMessage();
+
 }

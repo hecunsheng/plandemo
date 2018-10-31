@@ -5,28 +5,46 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.util.StringUtils;
 
 /**
- * @Author: hecs
- * @Date: 2018/10/10 14:13
- * @Description:
+ * 系统应用模板实现。
+ *
+ * <p>
+ *      通过使用系统应用模板，可以使开发人员只关注自己的业务逻辑实现，这里系统应用模板提供如下几个功能(类似于AOP)<br>
+ *      <ol>
+ *      <li>业务调用日志输出的控制</li>
+ *      <li>用于系统监控的digest日志输出</li>
+ *      <li>加锁控制</li>
+ *      <li>幂等性控制</li>
+ *      <li>事务控制</li>
+ *      <li>异常控制，对于系统抛出的异常、业务抛出的异常、业务返回的失败结果，都可以进行异常控制，以及对异常日志的输出。</li>
+ *      </ol>
+ *      <br>
+ *      <b>模板使用方式：</b>
+ *      <pre>
+ *           // 构建系统应用上下文
+ *           SysAppContext context = new SysAppContext(ActionEnum.DEFAULT_OPERATOR,obj,logger)
+ *           sysAppTemplate.execute(context, new SysAppCallback() {
+ *                  public BaseResult callback() {
+ *                   // 业务逻辑代码
+ *                  }
+ *           }
+ *      </pre>
+ * </p>
+ *
  */
 @Service("sysAppTemplate")
-public class SysAppTemplateImpl implements SysAppTemplate{
+public class SysAppTemplateImpl implements SysAppTemplate {
+
     /** 默认业务日志 */
     private static Logger nomalLogger  = LoggerFactory.getLogger(SysAppTemplateImpl.class);
 
     /** 默认摘要日志 */
     private static Logger digestLogger = LoggerFactory.getLogger(SysAppTemplateImpl.class);
-
-   /**
-    *
-    * @param context
-    * @param callback
-    * @Author hecs
-    * @Return sun.star.plan.qccr.SysAppResult
-    * @Date 2018/10/10 14:25
-    */
+    /**
+     *
+     */
     @Override
     public SysAppResult execute(final SysAppContext context, SysAppCallback callback) {
 
@@ -69,12 +87,18 @@ public class SysAppTemplateImpl implements SysAppTemplate{
             } catch (Exception e) {
                 getNomalLogger(context).error("记录流水日志时出现异常", e);
             }
+            // 删除
+            SysAppMethod sysAppMethod = SysAppAnnotationAspect.sysMethod.get();
+            if (sysAppMethod != null){
+                SysAppAnnotationAspect.sysMethod.remove();
+            }
 
             // #5 事后事件，处理结果不影响业务处理，有异常，打印警告
             SysAppResult afterBiz = callback.afterBiz();
             if (afterBiz != null) {
                 nomalLoggerWarn(context, afterBiz);
             }
+
         }
 
         return baseResult;
@@ -190,7 +214,9 @@ public class SysAppTemplateImpl implements SysAppTemplate{
             if (context.isLock()) {
                 // 设置lockKey
                 lockKey = callback.lockKey().toUpperCase();
-                lockKey = context.getActionEnum().getBizCode() + lockKey;
+                if (!StringUtils.startsWithIgnoreCase(lockKey,SysAppContext.prefix)){
+                    lockKey = context.getActionEnum().getBizCode() + lockKey;
+                }
             }
             // #2 加锁，需要加锁的业务，设置context加锁， 默认为zookeeper加锁，可以重写lock() unlock() 方法
             if (context.isLock()) {
@@ -255,6 +281,10 @@ public class SysAppTemplateImpl implements SysAppTemplate{
      * @date: 2015年11月19日 下午6:31:37
      */
     private void nomalLogger(SysAppContext context, SysAppResult baseResult) {
+        Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Thread.currentThread() .getStackTrace()[1].getClassName();
+
+
         String logStr = null;
         if (getNomalLogger(context).isDebugEnabled()) {
             logStr = SysLogFormatUtil.format(context, baseResult,  true, context.getObj());
@@ -321,4 +351,5 @@ public class SysAppTemplateImpl implements SysAppTemplate{
         return context.getNomalLogger() == null ? digestLogger : context.getDigestLogger()
                 .getLogger();
     }
+
 }

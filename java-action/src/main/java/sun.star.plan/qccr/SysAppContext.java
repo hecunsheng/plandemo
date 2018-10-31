@@ -1,8 +1,7 @@
 package sun.star.plan.qccr;
-
 import org.springframework.transaction.support.TransactionTemplate;
-
 /**
+ *
  * 系统应用上下文
  *
  * <p>
@@ -17,12 +16,11 @@ import org.springframework.transaction.support.TransactionTemplate;
  *          <li>Logger对象，以便控制日志输出文件</li>
  *      </ol>
  * </p>
- *
- * @Author: hecs
- * @Date: 2018/10/10 14:17
- * @Description:
  */
 public class SysAppContext {
+
+    public static  final  String  prefix ="__@_";
+
     /** 操作类型：必需设置 */
     private ActionEnumInterface  actionEnum;
 
@@ -329,4 +327,5 @@ public class SysAppContext {
     public void setToken(String token) {
         this.token = token;
     }
+
 }

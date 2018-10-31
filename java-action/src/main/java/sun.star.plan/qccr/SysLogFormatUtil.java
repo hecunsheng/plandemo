@@ -1,19 +1,8 @@
 package sun.star.plan.qccr;
-
 import org.apache.commons.lang3.StringUtils;
 
-/**
- *
- * 日志输出格式化工具.
- * <p>
- *      通过日志的格式化工具，控制一个系统输出的大部分业务日志规范，以便更好的管理和查询日志。
- * </p>
- *
- * @Author: hecs
- * @Date: 2018/10/10 14:52
- * @Description:
- */
 public class SysLogFormatUtil {
+
     private static final String FULL_LEFT_SIGN  = "【";
     private static final String FULL_RIGHT_SIGN = "】";
     private static final String HALF_LEFT_SIGN  = "[";
@@ -164,8 +153,6 @@ public class SysLogFormatUtil {
      * @param elapse
      * @param baseResult
      * @return
-     * @author: wangqi
-     * @date: 2015年9月14日 下午2:47:36
      */
     public static String digestLog(SysAppContext context, long elapse, SysAppResult baseResult) {
         return digestLog(context.getActionEnum().getBizType(),
@@ -187,8 +174,6 @@ public class SysLogFormatUtil {
      * @param elapse
      * @param baseResult
      * @return
-     * @author: wangqi
-     * @date: 2015年9月14日 下午2:47:36
      */
     @SuppressWarnings("unchecked")
     public static String digestLog(String sourceType, String actionCode, String actionMsg,

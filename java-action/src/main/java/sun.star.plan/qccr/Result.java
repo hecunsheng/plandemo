@@ -1,6 +1,7 @@
 package sun.star.plan.qccr;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -8,12 +9,8 @@ import java.util.Map;
 /**
  * 返回结果类
  * <p>常用于dubbo服务接口的返回值的封装</p>
- *
- * @Author: hecs
- * @Date: 2018/10/10 14:08
- * @Description:
  */
-public class Result<T> implements Serializable{
+public class Result<T> implements Serializable {
     private static final long serialVersionUID = -3887725517645851694L;
 
     /* 结果数据 */
@@ -92,7 +89,6 @@ public class Result<T> implements Serializable{
         this.source = source;
     }
 
-
     public String getAppMsg() {
         return appMsg;
     }
@@ -103,7 +99,7 @@ public class Result<T> implements Serializable{
 
     @Override
     public String toString() {
-        MoreObjects.ToStringHelper toString =  MoreObjects.toStringHelper(this);
+        ToStringHelper toString =  MoreObjects.toStringHelper(this);
         if(source != null) {
             toString.add("source", source);
         }

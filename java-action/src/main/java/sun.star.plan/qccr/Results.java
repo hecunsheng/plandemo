@@ -4,9 +4,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * @Author: hecs
- * @Date: 2018/10/10 14:54
- * @Description:
+ * 结果工具类，方便生成一些公共，常用的结果实例
+ *
  */
 public abstract class Results {
     /** 成功结果 */

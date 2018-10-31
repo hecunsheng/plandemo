@@ -1,5 +1,4 @@
-package sun.star.plan.qccr;
-
+package sun.star.plan.qccr; /**
 /**
  *
  * 系统应用模板回调接口.
@@ -9,9 +8,6 @@ package sun.star.plan.qccr;
  *      真正的业务逻辑由系统模板通过回调接口的方式来实现
  * </p>
  *
- * @Author: hecs
- * @Date: 2018/10/10 14:24
- * @Description:
  */
 public interface SysAppCallback {
     /**
@@ -68,7 +64,8 @@ public interface SysAppCallback {
     public SysAppResult doBiz();
 
     /**
-     * 事后处理
+     * 事后处理, 事务处理之外，
+     *
      * @return
      * @date: 2015年11月19日 下午3:32:04
      */

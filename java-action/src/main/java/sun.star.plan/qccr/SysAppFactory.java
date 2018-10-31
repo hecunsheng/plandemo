@@ -7,11 +7,10 @@ import org.springframework.util.StringUtils;
 
 /**
  * tranContext 工厂
- * @author hecs
- * @Date: 2018/10/10 15:06
- * @Description:
  */
 public class SysAppFactory {
+
+    public static  final  String  prefix ="__@_";
 
     /** 事务模板 **/
     private TransactionTemplate  transactionTemplate;
@@ -25,7 +24,7 @@ public class SysAppFactory {
     private String               detailLoggerName;
 
     /** sysAppTemplate 处理模板 */
-    private SysAppTemplate       sysAppTemplate = new SysAppTemplateImpl();
+    private SysAppTemplate sysAppTemplate = new SysAppTemplateImpl();
 
     /** 摘要日志*/
     private LoggerEnumInterface  digestLogger;
@@ -37,10 +36,32 @@ public class SysAppFactory {
     private DefaultLockInterface lockHandler;
 
     /**
+     *  事务模板
+     * @param callback
+     * @return
+     */
+    public SysAppResult template(SysAppBaseCallBack callback) {
+        SysAppMethod sysAppMethod = SysAppAnnotationAspect.sysMethod.get();
+        if (sysAppMethod != null){
+            SysAppContext context = tranContext(sysAppMethod.getActionEnum(), sysAppMethod.getDigestTag(), sysAppMethod.getObj());
+            if (sysAppMethod.isLock()){
+                context.setLock(true);
+                context.setLockInterface(lockHandler);
+                context.setNeedUnLock(sysAppMethod.isNeedUnLock());
+            }
+            if (sysAppMethod.isTransaction()) {
+                context.setTransactionTemplate(transactionTemplate);
+                context.setHandlerType(SysHandlerType.TRAN);
+            }
+            return sysAppTemplate.execute(context, callback);
+        }
+        return  null;
+    }
+
+    /**
      * 创建SysAppContext对象，
      * @param actionEnum
      * @param digestTag
-     * @param transactionTemplate
      * @param obj
      * @return
      * @date: 2015年11月27日 上午11:11:42

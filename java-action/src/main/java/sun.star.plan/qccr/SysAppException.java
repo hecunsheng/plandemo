@@ -1,5 +1,4 @@
-package sun.star.plan.qccr;
-
+package sun.star.plan.qccr; /**
 /**
  *
  * 系统应用异常。
@@ -9,22 +8,27 @@ package sun.star.plan.qccr;
  *      第二个就是抛出系统应用异常SysAppException，
  * </p>
  *
- * @Author: hecs
- * @Date: 2018/10/10 14:49
- * @Description:
  */
 public class SysAppException extends RuntimeException {
+
     private static final long serialVersionUID = -3708111590848157964L;
 
+    /**  异常返回结果 **/
+    private Object           data;
     /**
      * 错误码
      */
     private StateCode         stateCode;
 
     /**
-     * 扩展描述
+     * 扩展描述,
      */
     private String            extDescribe;
+
+    /**
+     *  App 展示信息，对应 Result.appMsg
+     */
+    private String            appMsg;
 
     /**
      * 系统应用异常构造器
@@ -43,6 +47,38 @@ public class SysAppException extends RuntimeException {
     public SysAppException(StateCode stateCode, String extDescribe) {
         this.stateCode = stateCode;
         this.extDescribe = extDescribe;
+    }
+
+    /**
+     *  异常信息返回， 不带返回数据
+     * @param stateCode
+     * @param ext   1 Result.extInfo ,日常描述，  2.Result.appMsg 用于app文案透出
+     */
+    public SysAppException(StateCode stateCode, String... ext) {
+        this.stateCode = stateCode;
+        if (ext.length == 1){
+            this.extDescribe = ext[0];
+        }else if (ext.length > 1){
+            this.appMsg = ext[0];
+        }
+
+    }
+
+    /**
+     *  异常信息返回， 带返回数据
+     * @param data
+     * @param stateCode
+     * @param ext    1 Result.extInfo ,日常描述，  2.Result.appMsg 用于app文案透出
+     */
+    public SysAppException(Object data , StateCode stateCode, String... ext) {
+        this.stateCode = stateCode;
+        this.data = data;
+        if (ext.length == 1){
+            this.extDescribe = ext[0];
+        }else if (ext.length > 1){
+            this.appMsg = ext[0];
+        }
+
     }
 
     /**
@@ -84,4 +120,5 @@ public class SysAppException extends RuntimeException {
     public String getExtDescribe() {
         return extDescribe;
     }
+
 }
