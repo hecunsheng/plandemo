@@ -9,27 +9,27 @@ import sun.star.plan.observer.core.Event;
  * @Description:
  */
 public class MouseEventCallback {
-    public void onClick(Event event){
+    public void click(Event event){
         System.out.println("=======触发鼠标单击事件========\n" + event);
         System.out.println("这是鼠标单击以后要执行的逻辑");
     }
-    public void onDoubleClick(Event event){
+    public void doubleClick(Event event){
         System.out.println("=======触发鼠标双击事件========\n" + event);
         System.out.println("这是鼠标双击以后要执行的逻辑");
     }
-    public void onUp(Event event){
+    public void up(Event event){
         System.out.println("=======触发鼠标弹起事件========\n" + event);
     }
-    public void onDown(Event event){
+    public void down(Event event){
         System.out.println("=======触发鼠标按下事件========\n" + event);
     }
-    public void onMove(Event event){
+    public void move(Event event){
         System.out.println("=======触发鼠标移动事件========\n" + event);
     }
-    public void onWheel(Event event){
+    public void wheel(Event event){
         System.out.println("=======触发鼠标滚动事件========\n" + event);
     }
-    public void onOver(Event event){
+    public void over(Event event){
         System.out.println("=======触发鼠标悬停事件========\n" + event);
     }
 }

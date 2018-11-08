@@ -11,11 +11,11 @@ import sun.star.plan.observer.core.EventListener;
 public class Mouse extends EventListener{
     public void click(){
         System.out.println("鼠标单击事件");
-        this.trigger(MouseEventType.ON_CLICK);
+//        this.trigger(MouseEventType.ON_CLICK);
     }
     public void doubleClick(){
         System.out.println("鼠标双击事件");
-        this.trigger(MouseEventType.ON_DOUBLE_CLICK);
+//        this.trigger(MouseEventType.ON_DOUBLE_CLICK);
     }
     public void up(){
         System.out.println("鼠标弹起事件");

@@ -1,6 +1,7 @@
 package sun.star.plan.observer.core;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.lang.reflect.Method;
 
@@ -10,6 +11,7 @@ import java.lang.reflect.Method;
  * @Description:
  */
 @Data
+@Accessors(chain = true)
 public class Event {
     //事件源
     private Object source;
@@ -22,26 +24,11 @@ public class Event {
     //时间点
     private long time;
 
-    public Event(Object target, Method callBack) {
+    private Object args;
+
+    public Event(Object target, Method callBack,Object args) {
         this.target = target;
         this.callBack = callBack;
+        this.args = args;
     }
-
-//    Event setSource(Object source) {
-//        this.source = source;
-//        return this;
-//    }
-
-    Event setTrigger(String trigger) {
-        this.trigger = trigger;
-        return this;
-    }
-
-
-//    Event setTime(long time) {
-//        this.time = time;
-//        return this;
-//    }
-
-
 }
