@@ -1,4 +1,4 @@
-package sun.star.plan.qccr;
+package sun.star.plan.qr;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

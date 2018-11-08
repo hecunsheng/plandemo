@@ -1,4 +1,4 @@
-package sun.star.plan.qccr;
+package sun.star.plan.qr;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

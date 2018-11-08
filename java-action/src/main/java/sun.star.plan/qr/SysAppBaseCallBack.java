@@ -1,4 +1,4 @@
-package sun.star.plan.qccr; /**
+package sun.star.plan.qr; /**
 /**
  * 默认回调接口实现，
  *  1、默认实现lock(),unlock() ,lockKey() ,checkHandler(),checkIdempotence(),
@@ -12,7 +12,7 @@ public abstract class SysAppBaseCallBack implements SysAppCallback {
     /**
      * 参数校验
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午1:57:53
      */
     @Override
@@ -34,7 +34,7 @@ public abstract class SysAppBaseCallBack implements SysAppCallback {
      *  <p>1、默认使用zookeeper进行加锁，需要重新lockkey()方法</p>
      *  <p>2、子类覆盖写自己的加锁逻辑，可以使用 select for update nowait  或 其他加锁方式</p>
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午1:53:04
      */
     @Override
@@ -50,7 +50,7 @@ public abstract class SysAppBaseCallBack implements SysAppCallback {
      *  <p>1、默认使用zookeeper进行加锁，需要重新lockkey()方法</p>
      *  <p>2、子类覆盖实现自己的解锁逻辑</p>
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午1:53:43
      */
     @Override
@@ -65,7 +65,7 @@ public abstract class SysAppBaseCallBack implements SysAppCallback {
      * 返回默认加锁主键，
      *      默认使用zookeeper进行加锁，
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午1:51:07
      */
     @Override
@@ -76,7 +76,7 @@ public abstract class SysAppBaseCallBack implements SysAppCallback {
     /**
      * 幂等性校验
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午2:00:59
      */
     @Override

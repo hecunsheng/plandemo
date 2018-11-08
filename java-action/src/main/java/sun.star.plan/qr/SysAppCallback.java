@@ -1,4 +1,4 @@
-package sun.star.plan.qccr; /**
+package sun.star.plan.qr; /**
 /**
  *
  * 系统应用模板回调接口.
@@ -13,7 +13,7 @@ public interface SysAppCallback {
     /**
      * 参数校验
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午1:57:53
      */
     public SysAppResult checkHandler();
@@ -23,7 +23,7 @@ public interface SysAppCallback {
      * 返回默认加锁主键，
      *      默认使用zookeeper进行加锁，
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午1:51:07
      */
     public String lockKey();
@@ -31,7 +31,7 @@ public interface SysAppCallback {
     /**
      * 加锁
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午1:53:04
      */
     public SysAppResult lock(SysAppContext context, String lockKey);
@@ -40,7 +40,7 @@ public interface SysAppCallback {
      * 解锁
      *   释放锁失败时，需要设置释放需要数据回滚。 事务模式数据进行回滚，
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午1:53:43
      */
     public SysAppResult unLock(SysAppContext context, String lockKey);
@@ -50,7 +50,7 @@ public interface SysAppCallback {
     /**
      * 幂等性校验
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午2:00:59
      */
     public SysAppResult checkIdempotence();

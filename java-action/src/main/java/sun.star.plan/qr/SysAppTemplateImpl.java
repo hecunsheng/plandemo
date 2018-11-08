@@ -1,4 +1,4 @@
-package sun.star.plan.qccr;
+package sun.star.plan.qr;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -170,7 +170,7 @@ public class SysAppTemplateImpl implements SysAppTemplate {
      * @param callback
      * @param context
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午2:41:38
      */
     private SysAppResult tradeTransaction(final SysAppContext context, final SysAppCallback callback) {
@@ -201,7 +201,7 @@ public class SysAppTemplateImpl implements SysAppTemplate {
      * @param context
      * @param callback
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午2:47:56
      */
     private SysAppResult handler(final SysAppContext context, SysAppCallback callback) {
@@ -318,7 +318,7 @@ public class SysAppTemplateImpl implements SysAppTemplate {
      *      如果业务失败，主要进行警告日志输出
      * @param baseResult
      * @param context
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午2:46:15
      */
     private void nomalLoggerWarn(SysAppContext context, SysAppResult baseResult) {
@@ -332,7 +332,7 @@ public class SysAppTemplateImpl implements SysAppTemplate {
      * 获取业务日志输出对象。
      * @param context
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午2:46:43
      */
     private Logger getNomalLogger(SysAppContext context) {
@@ -344,7 +344,7 @@ public class SysAppTemplateImpl implements SysAppTemplate {
      * 获取摘要日志输出对象。
      * @param context
      * @return
-     * @author: wangqi
+     * @author:
      * @date: 2015年9月14日 下午2:46:43
      */
     private Logger getDigestLogger(SysAppContext context) {

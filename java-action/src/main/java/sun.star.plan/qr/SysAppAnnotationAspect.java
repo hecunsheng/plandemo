@@ -1,4 +1,4 @@
-package sun.star.plan.qccr;
+package sun.star.plan.qr;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -25,7 +25,7 @@ public class SysAppAnnotationAspect {
 
     public static ThreadLocal<SysAppMethod>  sysMethod = new ThreadLocal<>();
 
-    private static final String POINTCUT = "@annotation(com.qccr.commons.spring.template.annotation.SysAppAnnotation)";
+    private static final String POINTCUT = "@annotation(com.qr.commons.spring.template.annotation.SysAppAnnotation)";
 
     /**
      * 环绕通知需要携带ProceedingJoinPoint类型的参数

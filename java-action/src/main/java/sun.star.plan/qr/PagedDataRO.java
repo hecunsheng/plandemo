@@ -1,4 +1,4 @@
-package sun.star.plan.qccr;
+package sun.star.plan.qr;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -10,7 +10,7 @@ import java.util.List;
  * 分布查询结果
  *
  * @name 分布查询结果
- * @author xuhaifeng@qccr.com
+ * @author xuhaifeng@qr.com
  * @since Revision:1.0.0, Date: 2015年11月13日 下午7:18:55
  */
 public class PagedDataRO<T extends Serializable> implements Serializable {

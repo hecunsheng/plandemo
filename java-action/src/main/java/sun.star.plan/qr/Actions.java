@@ -1,4 +1,4 @@
-package sun.star.plan.qccr; /**
+package sun.star.plan.qr; /**
 /**
  * 业务操作枚举。
  * <p>
