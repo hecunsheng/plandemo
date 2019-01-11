@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/rabbit
+     http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:rabbitMQ-config.properties"/>
+    <!--配置connection-factory，指定连接rabbit server参数 -->
+    <rabbit:connection-factory id="connectionFactory" host="${mq.host}"
+                               port="${mq.port}" username="${mq.username}" password="${mq.password}"
+                               virtual-host="${mq.vhost}"
+                               channel-cache-size="50"/>
+    <!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成 -->
+    <rabbit:admin id="connectAdmin" connection-factory="connectionFactory" />
+
+    <!--######分隔线######-->
+    <!--定义queue -->
+    <rabbit:queue name="MY_FIRST_QUEUE" durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin" />
+
+    <!--定义direct exchange，绑定MY_FIRST_QUEUE -->
+    <rabbit:direct-exchange name="MY_DIRECT_EXCHANGE" durable="true" auto-delete="false" declared-by="connectAdmin">
+        <rabbit:bindings>
+            <rabbit:binding queue="MY_FIRST_QUEUE" key="FirstKey">
+            </rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--定义rabbit template用于数据的接收和发送 -->
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" exchange="MY_DIRECT_EXCHANGE" />
+
+    <!--消息接收者 -->
+    <bean id="messageReceiver" class="star.plan.demo.consumer.FirstConsumer"></bean>
+
+    <!--queue listener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 -->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener queues="MY_FIRST_QUEUE" ref="messageReceiver" />
+    </rabbit:listener-container>
+
+    <!--&lt;!&ndash;定义queue &ndash;&gt;-->
+    <!--<rabbit:queue name="MY_SECOND_QUEUE" durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin" />-->
+
+    <!--&lt;!&ndash; 将已经定义的Exchange绑定到MY_SECOND_QUEUE，注意关键词是key &ndash;&gt;-->
+    <!--<rabbit:direct-exchange name="MY_DIRECT_EXCHANGE" durable="true" auto-delete="false" declared-by="connectAdmin">-->
+        <!--<rabbit:bindings>-->
+            <!--<rabbit:binding queue="MY_SECOND_QUEUE" key="SecondKey"></rabbit:binding>-->
+        <!--</rabbit:bindings>-->
+    <!--</rabbit:direct-exchange>-->
+
+    <!--&lt;!&ndash; 消息接收者 &ndash;&gt;-->
+    <!--<bean id="receiverSecond" class="star.plan.demo.consumer.SecondConsumer"></bean>-->
+
+    <!--&lt;!&ndash; queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 &ndash;&gt;-->
+    <!--<rabbit:listener-container connection-factory="connectionFactory">-->
+        <!--<rabbit:listener queues="MY_SECOND_QUEUE" ref="receiverSecond" />-->
+    <!--</rabbit:listener-container>-->
+
+    <!--&lt;!&ndash;######分隔线######&ndash;&gt;-->
+    <!--&lt;!&ndash;定义queue &ndash;&gt;-->
+    <!--<rabbit:queue name="rabbitQueue" durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin" />-->
+
+    <!--&lt;!&ndash; 定义topic exchange，绑定MY_THIRD_QUEUE，注意关键词是pattern &ndash;&gt;-->
+    <!--<rabbit:topic-exchange name="rabbit" durable="true" auto-delete="false" declared-by="connectAdmin">-->
+        <!--<rabbit:bindings>-->
+            <!--<rabbit:binding queue="rabbitQueue" pattern="#.ABC.#"></rabbit:binding>-->
+        <!--</rabbit:bindings>-->
+    <!--</rabbit:topic-exchange>-->
+
+    <!--&lt;!&ndash;定义rabbit template用于数据的接收和发送 &ndash;&gt;-->
+    <!--<rabbit:template id="amqpTemplate2" connection-factory="connectionFactory" exchange="rabbit" />-->
+
+    <!--&lt;!&ndash; 消息接收者 &ndash;&gt;-->
+    <!--<bean id="receiverThird" class="star.plan.demo.consumer.ThirdConsumer"></bean>-->
+
+    <!--&lt;!&ndash; queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 &ndash;&gt;-->
+    <!--<rabbit:listener-container connection-factory="connectionFactory">-->
+        <!--<rabbit:listener queues="MY_THIRD_QUEUE" ref="receiverThird" />-->
+    <!--</rabbit:listener-container>-->
+
+    <!--&lt;!&ndash;######分隔线######&ndash;&gt;-->
+    <!--&lt;!&ndash;定义queue &ndash;&gt;-->
+    <!--<rabbit:queue name="MY_FOURTH_QUEUE" durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin" />-->
+
+    <!--&lt;!&ndash; 定义fanout exchange，绑定MY_FIRST_QUEUE 和 MY_FOURTH_QUEUE &ndash;&gt;-->
+    <!--<rabbit:fanout-exchange name="MY_FANOUT_EXCHANGE" auto-delete="false" durable="true" declared-by="connectAdmin" >-->
+        <!--<rabbit:bindings>-->
+            <!--<rabbit:binding queue="MY_FIRST_QUEUE"></rabbit:binding>-->
+            <!--<rabbit:binding queue="MY_FOURTH_QUEUE"></rabbit:binding>-->
+        <!--</rabbit:bindings>-->
+    <!--</rabbit:fanout-exchange>-->
+
+    <!--&lt;!&ndash; 消息接收者 &ndash;&gt;-->
+    <!--<bean id="receiverFourth" class="star.plan.demo.consumer.FourthConsumer"></bean>-->
+
+    <!--&lt;!&ndash; queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 &ndash;&gt;-->
+    <!--<rabbit:listener-container connection-factory="connectionFactory">-->
+        <!--<rabbit:listener queues="MY_FOURTH_QUEUE" ref="receiverFourth" />-->
+    <!--</rabbit:listener-container>-->
+</beans>

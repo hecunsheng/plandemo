@@ -14,6 +14,7 @@
         <module>spring-aop</module>
         <module>code-generator</module>
         <module>spring-mvc</module>
+        <module>rabbit-mq</module>
     </modules>
 
     <properties>
@@ -36,6 +37,16 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <dependency>
@@ -151,6 +162,17 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.35</version>
+        </dependency>
+        <!--rabbitmq依赖 -->
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <version>1.5.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+            <version>5.5.1</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
