@@ -105,16 +105,10 @@
             <artifactId>logback-core</artifactId>
             <version>1.0.13</version>
         </dependency>
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-access</artifactId>
             <version>1.0.13</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.31</version>
         </dependency>
         <dependency>
             <groupId>org.logback-extensions</groupId>
@@ -122,6 +116,24 @@
             <version>0.1.2</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- 序列化 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.31</version>
+        </dependency>
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.38</version>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+
         <!-- api-servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
