@@ -17,10 +17,11 @@ public class SerializeTest {
 
         /**
          *
-         * java原生: byte.length:165
-         * xmlstream: byte.length:239
-         * hessian: byte.length:47
-         * fastjson: byte.length:10
+         * java原生-> byte.length: 165
+         * xmlstream-> byte.length: 239
+         * hessian-> byte.length: 47
+         * fastjson-> byte.length: 10
+         * protobuf-> byte.length: 8
          * */
 
         byte[] bytes = iSerializer.serialize(user);
