@@ -17,6 +17,7 @@
         <module>rabbit-mq</module>
         <module>zookeeper</module>
         <module>leetcode</module>
+        <module>redis-cli</module>
     </modules>
 
     <properties>
