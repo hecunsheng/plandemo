@@ -1,4 +1,4 @@
-package run.star.plan.BATJ;
+package run.star.plan.batj;
 
 import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;

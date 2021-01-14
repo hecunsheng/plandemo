@@ -1,4 +1,4 @@
-package run.star.plan.BATJ.proxy;
+package run.star.plan.batj.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

@@ -59,9 +59,9 @@ public class HttpClientUtil {
             SSLContext sslcontext = SSLContexts.custom().loadTrustMaterial(null,
                     new TrustSelfSignedStrategy())
                     .build();
-            HostnameVerifier hostnameVerifier = SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+//            HostnameVerifier hostnameVerifier = SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-                    sslcontext, hostnameVerifier);
+                    sslcontext);
             Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
                     .register("http", PlainConnectionSocketFactory.getSocketFactory())
                     .register("https", sslsf)
@@ -128,34 +128,34 @@ public class HttpClientUtil {
         System.out.println(sign);
 
 
-//        Hashtable<String, Object> params = new Hashtable<>();
-//        params.put("msgtype", "markdown");
-//
-//        Map<String, String> contentMap = Maps.newHashMap();
-//        contentMap.put("text", "### 测试的  \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73% \n \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73%\n >" +
-//                "### 测试的  \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73% \n \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73%"
-//        );
-//        contentMap.put("title", "通知");
-//
-//        params.put("markdown", contentMap);
-//        params.put("at", "{\"isAtAll\": true}");
-//        String res = HttpClientUtil.postJsonBySSL("https://oapi.dingtalk.com/robot/send?access_token=98dcc8f96ee1c5cc47508a869e51251864510ab9308db20d8b6f28ffa6053492" + "&timestamp=" + timestamp + "&sign=" + sign, params);
-//        JSONObject resObj = JSON.parseObject(res);
-//        System.out.println(resObj != null && resObj.get("errcode").equals(0));
+        Hashtable<String, Object> params = new Hashtable<>();
+        params.put("msgtype", "markdown");
+
+        Map<String, String> contentMap = Maps.newHashMap();
+        contentMap.put("text", "### 测试的  \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73% \n \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73%\n >" +
+                "### 测试的  \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73% \n \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73%"
+        );
+        contentMap.put("title", "通知");
+
+        params.put("markdown", contentMap);
+        params.put("at", "{\"isAtAll\": true}");
+        String res = HttpClientUtil.postJsonBySSL("https://oapi.dingtalk.com/robot/send?access_token=98dcc8f96ee1c5cc47508a869e51251864510ab9308db20d8b6f28ffa6053492" + "&timestamp=" + timestamp + "&sign=" + sign, params);
+        JSONObject resObj = JSON.parseObject(res);
+        System.out.println(resObj != null && resObj.get("errcode").equals(0));
 
 
 
-//        //发送微信消息提醒
-        MarkdownMessageBuilder markdownMessageBuilder = new MarkdownMessageBuilder();
-        markdownMessageBuilder.setTitle("问题反馈提醒");
-        markdownMessageBuilder.setReceiveUrl("https://oapi.dingtalk.com/robot/send?access_token=98dcc8f96ee1c5cc47508a869e51251864510ab9308db20d8b6f28ffa6053492" + "&timestamp=" + timestamp + "&sign=" + sign);
-        markdownMessageBuilder.appendContentln("反馈来源: " + 1);
-        markdownMessageBuilder.appendContentln("门店名称: " + 1);
-        markdownMessageBuilder.appendContentln("反馈渠道: " + 1);
-        markdownMessageBuilder.appendContentln("反馈类型: " + 1);
-        markdownMessageBuilder.appendContentln("反馈内容: " + 1);
-        markdownMessageBuilder.appendContentln("反馈内容: [" + 32 + "](www.baidu.com)");
-        boolean send = MessageSendClient.send(markdownMessageBuilder.build());
-        System.out.println(11);
+        //发送微信消息提醒
+//        MarkdownMessageBuilder markdownMessageBuilder = new MarkdownMessageBuilder();
+//        markdownMessageBuilder.setTitle("问题反馈提醒");
+//        markdownMessageBuilder.setReceiveUrl("https://oapi.dingtalk.com/robot/send?access_token=98dcc8f96ee1c5cc47508a869e51251864510ab9308db20d8b6f28ffa6053492" + "&timestamp=" + timestamp + "&sign=" + sign);
+//        markdownMessageBuilder.appendContentln("反馈来源: " + 1);
+//        markdownMessageBuilder.appendContentln("门店名称: " + 1);
+//        markdownMessageBuilder.appendContentln("反馈渠道: " + 1);
+//        markdownMessageBuilder.appendContentln("反馈类型: " + 1);
+//        markdownMessageBuilder.appendContentln("反馈内容: " + 1);
+//        markdownMessageBuilder.appendContentln("反馈内容: [" + 32 + "](www.baidu.com)");
+//        boolean send = MessageSendClient.send(markdownMessageBuilder.build());
+//        System.out.println(11);
     }
 }

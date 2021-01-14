@@ -1,4 +1,4 @@
-package run.star.plan.BATJ.proxy;
+package run.star.plan.batj.proxy;
 
 /**
  * @author hecs
