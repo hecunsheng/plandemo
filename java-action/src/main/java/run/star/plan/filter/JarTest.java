@@ -39,9 +39,8 @@ public class JarTest {
                         String className = classFullName.substring(0, classFullName.length() - 6).replace("/", ".");
                         //打印类名
                         if (className.contains("Facade")) {
-                            System.out.println("\"/Users/hecs/kklgitworkspace/estudy/estudy-iface/src/main/java/" + className.replace(".", "/") + ".java\",");
+                            System.out.println("\"/Users/hecs/kklgitworkspace/cpcoreprod/cpcoreprod-iface/src/main/java/" + className.replace(".", "/") + ".java\",");
                         }
-
                     }
                 }
             }
@@ -51,7 +50,8 @@ public class JarTest {
     }
 
     public static void main(String[] args) throws Exception {
-        getJarName("/Users/hecs/kklgitworkspace/estudy/estudy-iface/target/estudy-iface-1.0.0.20201018.lg-SNAPSHOT.jar");
+//        getJarName("/Users/hecs/kklgitworkspace/memberpowerprod/memberpowerprod-iface/target/memberpowerprod-iface-1.0.0.20210201-SNAPSHOT.jar");
+        getJarName("/Users/hecs/kklgitworkspace/cpcoreprod/cpcoreprod-iface/target/cpcoreprod-iface-1.0.0.20210203-dyj-SNAPSHOT.jar");
 
     }
 
