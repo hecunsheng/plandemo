@@ -3,6 +3,7 @@ package run.star.message.sender;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -10,11 +11,15 @@ import org.slf4j.LoggerFactory;
 import run.star.message.config.DefaultCfg;
 import run.star.message.config.DingDingCfg;
 import run.star.message.core.MessageContext;
+import run.star.message.message.MarkdownMessageBuilder;
 import run.star.message.message.Message;
 import run.star.message.message.MessageMerger;
 import run.star.message.mq.MessageQueue;
 import run.star.message.util.HttpClientUtil;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.net.URLEncoder;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -236,4 +241,22 @@ public class DingDingMessageSender implements MessageSender {
         messageClock.putIfAbsent(message.getReceiveUrl(), System.currentTimeMillis() + DefaultCfg.sendInterval);
     }
 
+    public static void main(String[] args) throws Exception{
+        Long timestamp = System.currentTimeMillis();
+        String secret = "SEC4756a27b49cbf3072b54b2c1ce0a4560076d40e924b1606c8f8ea44db320276e";
+
+        String stringToSign = timestamp + "\n" + secret;
+        Mac mac = Mac.getInstance("HmacSHA256");
+        mac.init(new SecretKeySpec(secret.getBytes("UTF-8"), "HmacSHA256"));
+        byte[] signData = mac.doFinal(stringToSign.getBytes("UTF-8"));
+        String sign = URLEncoder.encode(new String(Base64.encodeBase64(signData)), "UTF-8");
+        System.out.println(sign);
+
+        String receiveUrl = "https://oapi.dingtalk.com/robot/send?access_token=98dcc8f96ee1c5cc47508a869e51251864510ab9308db20d8b6f28ffa6053492" + "&timestamp=" + timestamp + "&sign=" + sign;
+        Message msg = MarkdownMessageBuilder.newBuilder().setReceiveUrl(receiveUrl)
+                .appendContent("hello world").setTitle("notice!!!").build();
+
+        DingDingMessageSender s = new DingDingMessageSender();
+        s.sendMessage(msg);
+    }
 }
