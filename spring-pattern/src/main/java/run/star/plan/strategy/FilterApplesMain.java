@@ -19,11 +19,7 @@ public class FilterApplesMain {
 
     public static void main(String[] args) {
         //05版本
-        System.out.println(filterFruit(bananas, new IAppleFilter<Banana>() {
-            public boolean test(Banana banana) {
-                return "red".equals(banana.getColor());
-            }
-        }));
+        System.out.println(filterFruit(bananas, (IAppleFilter<Banana>) banana -> "red".equals(banana.getColor())));
         /*   System.out.println(filterApples(new AppleFilterByGreenColor()));//04版本
            System.out.println(filterApples(new AppleFilterByWeight()));
            System.out.println(filterApples(new IAppleFilter() {//匿名内部类方式调用

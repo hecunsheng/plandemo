@@ -243,7 +243,8 @@ public class DingDingMessageSender implements MessageSender {
 
     public static void main(String[] args) throws Exception{
         Long timestamp = System.currentTimeMillis();
-        String secret = "SEC4756a27b49cbf3072b54b2c1ce0a4560076d40e924b1606c8f8ea44db320276e";
+//        String secret = "SEC4756a27b49cbf3072b54b2c1ce0a4560076d40e924b1606c8f8ea44db320276e";
+        String secret = "SEC0fffe3041c09271d8d46b392c13778d69aaa1465b50bdf4e2413a313a1d1e4b8";
 
         String stringToSign = timestamp + "\n" + secret;
         Mac mac = Mac.getInstance("HmacSHA256");
@@ -252,7 +253,8 @@ public class DingDingMessageSender implements MessageSender {
         String sign = URLEncoder.encode(new String(Base64.encodeBase64(signData)), "UTF-8");
         System.out.println(sign);
 
-        String receiveUrl = "https://oapi.dingtalk.com/robot/send?access_token=98dcc8f96ee1c5cc47508a869e51251864510ab9308db20d8b6f28ffa6053492" + "&timestamp=" + timestamp + "&sign=" + sign;
+//        String receiveUrl = "https://oapi.dingtalk.com/robot/send?access_token=98dcc8f96ee1c5cc47508a869e51251864510ab9308db20d8b6f28ffa6053492" + "&timestamp=" + timestamp + "&sign=" + sign;
+        String receiveUrl = "https://oapi.dingtalk.com/robot/send?access_token=7518fe13771c5e7f4a3b1fcf2aa377620ab0e108d85f20ee47512a7db1404359" + "&timestamp=" + timestamp + "&sign=" + sign;
         Message msg = MarkdownMessageBuilder.newBuilder().setReceiveUrl(receiveUrl)
                 .appendContent("hello world").setTitle("notice!!!").build();
 

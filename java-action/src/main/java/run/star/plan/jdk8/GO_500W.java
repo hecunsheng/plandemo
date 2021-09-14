@@ -6,7 +6,7 @@ import java.util.Random;
  * @author hecs
  * @date 2020-07-22 16:28
  */
-public class Go {
+public class GO_500W {
     public static void main(String[] args) {
         Random random = new Random();
         boolean charge = false;
