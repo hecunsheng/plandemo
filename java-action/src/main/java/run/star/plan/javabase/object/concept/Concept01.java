@@ -1,4 +1,4 @@
-package run.star.plan.java基础.面向对象总结;
+package run.star.plan.javabase.object.concept;
 
 import lombok.Getter;
 import lombok.Setter;
