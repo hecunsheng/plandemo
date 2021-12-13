@@ -28,7 +28,7 @@ public class JavaDocUse {
             MethodDoc[] methodDocs = classDoc.methods();
             for (MethodDoc methodDoc : methodDocs) {
                 // 打印出方法上的注释
-                System.out.println("cpcoreprod." + classDoc.name() + "." + methodDoc.name());
+                System.out.println("yivi-order." + classDoc.name() + "." + methodDoc.name() + "--->" + buildNoteName(methodDoc));
 //                System.out.println(methodDoc.commentText().replace("\n", " "));
 //                String commentText = methodDoc.commentText();
 //                int beginIndex = commentText.indexOf("\n");
@@ -41,19 +41,13 @@ public class JavaDocUse {
         }
     }
 
-    public static void show1() {
-        ClassDoc[] classes = rootDoc.classes();
-        for (ClassDoc classDoc : classes) {
-            MethodDoc[] methodDocs = classDoc.methods();
-            for (MethodDoc methodDoc : methodDocs) {
-                String commentText = methodDoc.commentText();
-                int beginIndex = commentText.indexOf("\n");
-                if (beginIndex != -1) {
-                    System.out.println(commentText.substring(0, beginIndex));
-                } else {
-                    System.out.println(methodDoc.commentText().replace("\n", " "));
-                }
-            }
+    private static String buildNoteName(MethodDoc methodDoc) {
+        String commentText = methodDoc.commentText();
+        int beginIndex = commentText.indexOf("\n");
+        if (beginIndex != -1) {
+            return commentText.substring(0, beginIndex);
+        } else {
+            return methodDoc.commentText().replace("\n", " ");
         }
     }
 
@@ -67,9 +61,8 @@ public class JavaDocUse {
         Main.execute(new String[]{"-doclet",
                 Doclet.class.getName(),
                 "-encoding", "utf-8", "-classpath", "",
-                "/Users/hecs/kklgitworkspace/cpcoreprod/cpcoreprod-iface/src/main/java/la/kaike/cpcoreprod/service/lesson/facade/LectureFacade.java"
+                "/Users/hecs/yivigitworkspace/yivi-order/yivi-order-api/src/main/java/com/yivi/order/api/data/v1/ComplaintProvider.java"
         });
         show();
-        show1();
     }
 }

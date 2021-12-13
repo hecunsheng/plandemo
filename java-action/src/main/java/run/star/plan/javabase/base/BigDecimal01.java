@@ -7,7 +7,7 @@ import java.math.RoundingMode;
  * @Author hecs
  * @Date 2021/10/18 15:44
  */
-public class IntType02 {
+public class BigDecimal01 {
     public static void main(String[] args) throws Exception {
         BigDecimal dec1 = new BigDecimal(3.0);
         BigDecimal dec2 = new BigDecimal(2.11);

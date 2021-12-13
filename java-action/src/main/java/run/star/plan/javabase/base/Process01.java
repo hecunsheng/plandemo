@@ -4,7 +4,7 @@ package run.star.plan.javabase.base;
  * @Author hecs
  * @Date 2021/10/19 10:28
  */
-public class Process1 {
+public class Process01 {
     public static void main(String[] args) {
         System.out.println(getSumOne(100));
         System.out.println(getSumTwo(30));

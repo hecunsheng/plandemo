@@ -1,0 +1,10 @@
+# Default ignored files
+*.class
+.idea
+*.iml
+out
+gen
+*.log
+*/target
+/logs
+*.MF
