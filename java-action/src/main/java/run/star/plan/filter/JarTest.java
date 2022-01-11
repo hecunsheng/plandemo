@@ -16,6 +16,7 @@ public class JarTest {
     public static void getJarName(String jarFile) throws Exception {
 
         try {
+            int i = 0;
             //通过将给定路径名字符串转换为抽象路径名来创建一个新File实例
             File f = new File(jarFile);
             URL url1 = f.toURI().toURL();
@@ -38,12 +39,15 @@ public class JarTest {
                         //去掉后缀.class
                         String className = classFullName.substring(0, classFullName.length() - 6).replace("/", ".");
                         //打印类名
-                        if (className.contains("Facade")) {
-                            System.out.println("\"/Users/hecs/kklgitworkspace/cpcoreprod/cpcoreprod-iface/src/main/java/" + className.replace(".", "/") + ".java\",");
+                        if (classFullName.contains("v1") && className.contains("Provider")) {
+                            i++;
+//                            System.out.println("\"/Users/hecs/yivigitworkspace/yivi-order/yivi-order-api/src/main/java/" + className.replace(".", "/") + ".java\",");
+                            System.out.println("\"/Users/hecs/yivigitworkspace/yivi-order/yivi-order-api/src/main/java/" + className.replace(".", "/") + ".java\",");
                         }
                     }
                 }
             }
+            System.out.println(i);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,7 +55,7 @@ public class JarTest {
 
     public static void main(String[] args) throws Exception {
 //        getJarName("/Users/hecs/kklgitworkspace/memberpowerprod/memberpowerprod-iface/target/memberpowerprod-iface-1.0.0.20210201-SNAPSHOT.jar");
-        getJarName("/Users/hecs/kklgitworkspace/cpcoreprod/cpcoreprod-iface/target/cpcoreprod-iface-1.0.0.20210203-dyj-SNAPSHOT.jar");
+        getJarName("/Users/hecs/yivigitworkspace/yivi-order/yivi-order-api/target/yivi-order-api-1.0.7-SNAPSHOT.jar");
 
     }
 

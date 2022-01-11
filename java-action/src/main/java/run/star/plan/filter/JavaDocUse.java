@@ -23,22 +23,17 @@ public class JavaDocUse {
      * 显示DocRoot中的基本信息
      */
     public static void show() {
+        int i = 0;
         ClassDoc[] classes = rootDoc.classes();
         for (ClassDoc classDoc : classes) {
             MethodDoc[] methodDocs = classDoc.methods();
             for (MethodDoc methodDoc : methodDocs) {
+                i++;
                 // 打印出方法上的注释
-                System.out.println("yivi-order." + classDoc.name() + "." + methodDoc.name() + "--->" + buildNoteName(methodDoc));
-//                System.out.println(methodDoc.commentText().replace("\n", " "));
-//                String commentText = methodDoc.commentText();
-//                int beginIndex = commentText.indexOf("\n");
-//                if(beginIndex != -1){
-//                    System.out.println(commentText.substring(0,beginIndex));
-//                }else {
-//                    System.out.println(methodDoc.commentText().replace("\n", " "));
-//                }
+                System.out.println(classDoc.name() + "." + methodDoc.name() + "--->" + buildNoteName(methodDoc));
             }
         }
+        System.out.println(i);
     }
 
     private static String buildNoteName(MethodDoc methodDoc) {
