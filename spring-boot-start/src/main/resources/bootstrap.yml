@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: spring-boot-start
+  cloud:
+    nacos:
+      config:
+        server-addr: '@server-addr@:8848'
+        file-extension: yaml
+        namespace: '@namespace@'
+        #多配置文件和哪几个文件自动刷新逗号分割
+#        shared-dataids: yivi-route.yaml
+#        refreshable-dataids: yivi-route.yaml

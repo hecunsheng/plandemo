@@ -19,6 +19,7 @@
         <module>leetcode</module>
         <module>redis-cli</module>
         <module>message</module>
+        <module>spring-boot-start</module>
     </modules>
 
     <properties>
@@ -242,6 +243,100 @@
         <dependencies>
         </dependencies>
     </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>nexus</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-resources-plugin</artifactId>
+                            <version>3.1.0</version>
+                            <configuration>
+                                <encoding>UTF-8</encoding>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <configuration>
+                                <skip>true</skip>
+                            </configuration>
+                            <version>2.12.4</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-maven-plugin</artifactId>
+                            <version>2.3.0.RELEASE</version>
+                            <configuration>
+                                <includeSystemScope>true</includeSystemScope>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>repackage</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
+        <profile>
+            <id>dev</id>
+            <properties>
+                <envFlag>dev</envFlag>
+                <server-addr>mse-ded22e70-p.nacos-ans.mse.aliyuncs.com</server-addr>
+                <namespace>ae77c258-4d4f-478f-baaa-084aee0ff7d3</namespace>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>gray</id>
+            <properties>
+                <envFlag>gray</envFlag>
+                <server-addr>mse-ded22e70-p.nacos-ans.mse.aliyuncs.com</server-addr>
+                <namespace>d2bdb109-5f3c-492e-a08c-cebfca774a81</namespace>
+            </properties>
+        </profile>
+        <profile>
+            <id>pre</id>
+            <properties>
+                <envFlag>pre</envFlag>
+                <server-addr>mse-ded22e70-p.nacos-ans.mse.aliyuncs.com</server-addr>
+                <namespace>6cf708a5-740c-4155-89f2-3ba62c5ee9ba</namespace>
+            </properties>
+        </profile>
+        <profile>
+            <id>local</id>
+            <properties>
+                <envFlag>local</envFlag>
+                <server-addr>mse-ded22e70-p.nacos-ans.mse.aliyuncs.com</server-addr>
+                <namespace>474c0a24-8381-444a-862d-d888a287ffbf</namespace>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <envFlag>test</envFlag>
+            </properties>
+        </profile>
+        <profile>
+            <id>release</id>
+            <properties>
+                <envFlag>release</envFlag>
+                <server-addr>mse-ded22e70-nacos-ans.mse.aliyuncs.com</server-addr>
+                <namespace>23cdede5-13f2-44d1-b172-2319b8e13193</namespace>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <!-- 指定编译文件的编码，防止乱码 -->

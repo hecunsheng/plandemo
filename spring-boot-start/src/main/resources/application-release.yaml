@@ -1,0 +1,141 @@
+#端口号
+server:
+  port: 8099
+
+#公共配置与profiles选择无关
+mybatis-plus:
+  type-aliases-package: com.yivi.order.script.data.bean
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#开发配置
+spring:
+  elasticsearch:
+    rest:
+      uris: es-cn-tl32gd4by001sls2n.elasticsearch.aliyuncs.com:9200
+      username: elastic
+      password: yivi123!
+  cloud:
+    nacos:
+      discovery:
+        enable: true
+        server-addr: mse-ded22e70-nacos-ans.mse.aliyuncs.com:8848
+        namespace: 23cdede5-13f2-44d1-b172-2319b8e13193
+  application:
+    name: yivi-order-script
+  shardingsphere:
+    datasource:
+      ds:
+        url: jdbc:mysql://rm-bp1nx5860798z7hq3.mysql.rds.aliyuncs.com:3306/prod?allowMultiQueries=true&useUnicode=true&autoReconnect=true&useAffectedRows=true&useSSL=false&serverTimezone=Asia/Shanghai
+        username: xuewangqi
+        password: yivi123!
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        ##druid
+        type: com.alibaba.druid.pool.DruidDataSource
+        # 下面为连接池的补充设置，应用到上面所有数据源中
+        # 初始化大小，最小，最大
+        initialSize: 10
+        minIdle: 2
+        maxActive: 500
+        # 配置获取连接等待超时的时间
+        maxWait: 10000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 10
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 10
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        ##对于长时间不使用的连接强制关闭
+        removeAbandoned: true
+        removeAbandonedTimeout: 1000
+        logAbandoned: true
+        #是否缓存preparedStatement，也就是PSCache，在mysql5.5以下的版本中没有PSCache功能，建议关闭掉
+        poolPreparedStatements: false
+        ##要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。
+        maxPoolPreparedStatementPerConnectionSize: 3
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall,slf4j
+        ## 合并多个DruidDataSource的监控数据
+        useGlobalDataSourceStat: true
+      names: ds
+    sharding:
+      tables:
+        order_sender_snapshot:
+          actual-data-nodes: ds.order_passer_snapshot_$->{0..15}
+          table-strategy:
+            standard:
+              precise-algorithm-class-name: com.yivi.base.sharding.algorithm.TableSharding16
+              sharding-column: order_id
+        order_driver_snapshot:
+          actual-data-nodes: ds.order_driver_snapshot_$->{0..15}
+          table-strategy:
+            standard:
+              precise-algorithm-class-name: com.yivi.base.sharding.algorithm.TableSharding16
+              sharding-column: order_id
+
+# feign配置
+feign:
+  # FeignAutoConfiguration
+  okhttp:
+    enabled: true
+  # FeignHttpClientProperties
+  httpclient:
+    max-connections: 300
+    max-connections-per-route: 100
+    time-to-live: 900
+    connection-timeout: 5000
+  # FeignHttpClientProperties
+  client:
+    config:
+      default:
+        logger-level: BASIC
+        connect-timeout: 5000
+        read-timeout: 5000
+  # FeignAutoConfiguration
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+      useGzipDecoder: true
+
+# ribbon负载全局配置
+ribbon:
+  eager-load:
+    enabled: true
+  MaxAutoRetriesNextServer: 0
+  ServerListRefreshInterval: 2000
+  ConnectTimeout: 2000
+  ReadTimeout: 5000
+
+# hystrix 熔断器
+hystrix:
+  threadpool:
+    default:
+      coreSize: 50
+  command:
+    default:
+      fallback:
+        isolation:
+          semaphore:
+            maxConcurrentRequests: 50
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+      circuitBreaker:
+        requestVolumeThreshold: 1000
+
+#日志
+log:
+  level: info
+  max: 100MB
+  moduleName: yivi-order-script
+  path: /home/admin/logs/yivi-order-script
+logging:
+  config: classpath:logback-order-script.xml
