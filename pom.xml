@@ -25,7 +25,7 @@
     <properties>
         <!-- dependency versions -->
         <servlet.api.version>2.4</servlet.api.version>
-        <spring.version>4.3.18.RELEASE</spring.version>
+        <spring.version>5.2.20.RELEASE</spring.version>
     </properties>
 
     <dependencies>
